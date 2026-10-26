@@ -847,4 +847,4 @@ re-checked.
 - [x] Train v4 on Colab and score the test split once (Step 20: test mAP50 0.883; v3 kept)
 - [ ] Epipolar geometry / stereo depth (needs two sideways iPhone photos)
 - [ ] Real iPhone video for optical flow
-- [ ] Commit and push to the assignment repo
+- [x] Commit and push to GitHub (github.com/Nabhishekreddy04/object_detection, branch main)
