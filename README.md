@@ -2,6 +2,8 @@
 
 [![CI](../../actions/workflows/ci.yml/badge.svg)](../../actions/workflows/ci.yml)
 
+**Author:** N Abhishek Reddy ([contact](#contact))
+
 This project detects traffic cones, barriers and stop signs in driving scenes, works out
 how far away each one is from a single camera, and labels the box with it, e.g. `Cone, 4.2m`.
 
@@ -534,3 +536,10 @@ To lint and test: `make lint test`.
   and [barriers-ctzjn](https://universe.roboflow.com/evoiz/barriers-ctzjn/dataset/2) (CC BY 4.0)
 - [BDD100K](https://bdd-data.berkeley.edu) (non-commercial research license). The frames in
   `assets/samples/` and `results/` are only used for demonstration.
+
+## Contact
+
+- **Name:** N Abhishek Reddy
+- **Phone:** +91 9902971175
+- **Email:** [reddynabhishek@gmail.com](mailto:reddynabhishek@gmail.com)
+- **GitHub:** [Nabhishekreddy04](https://github.com/Nabhishekreddy04)
