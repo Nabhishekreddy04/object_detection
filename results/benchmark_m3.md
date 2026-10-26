@@ -1,0 +1,13 @@
+Hardware: m3 (arm, torch 2.14.1)
+
+| variant | device | imgsz | mAP50 | mAP50-95 | FPS | latency_ms | size_MB | gzip_MB |
+|---|---|---|---|---|---|---|---|---|
+| PyTorch FP32 (baseline) | CPU | 640 | 0.867 | 0.651 | 31.6 | 31.6 | 5.44 | 4.84 |
+| PyTorch FP32 | MPS | 640 | 0.867 | 0.651 | 50.4 | 19.8 | 5.44 | 4.84 |
+| PyTorch FP16 | MPS | 640 | 0.866 | 0.651 | 52.3 | 19.1 | 5.44 | 4.84 |
+| ONNX Runtime FP32 | CPU | 640 | 0.867 | 0.651 | 34.5 | 29.0 | 9.85 | 8.57 |
+| ONNX Runtime INT8 (static PTQ) | CPU | 640 | 0.844 | 0.637 | 54.1 | 18.5 | 3.44 | 2.59 |
+| ONNX Runtime FP32 @320px | CPU | 320 | 0.744 | 0.547 | 117.9 | 8.5 | 9.73 | 8.56 |
+| PyTorch pruned 10% | CPU | 640 | 0.864 | 0.65 | 30.8 | 32.4 | 5.48 | 4.67 |
+| PyTorch pruned 30% | CPU | 640 | 0.713 | 0.497 | 30.9 | 32.3 | 5.48 | 4.04 |
+| PyTorch pruned 50% | CPU | 640 | 0.183 | 0.129 | 29.2 | 34.2 | 5.48 | 3.25 |

@@ -1,0 +1,28 @@
+# Camera intrinsics and real-world object sizes for pinhole distance estimation.
+#
+# Distance Z = f_px * H_real / h_px
+#   f_px   focal length in pixels (scaled to the actual image width)
+#   H_real real height of the object in metres
+#   h_px   bounding-box height in pixels
+
+camera:
+  # BDD100K does not publish per-image intrinsics, so the focal length is
+  # derived from an assumed dash-cam horizontal field of view:
+  #   f_px = (W / 2) / tan(HFOV / 2) = 640 / tan(32.5 deg) ~= 1005 px  at W = 1280
+  # Replace with a calibrated value (e.g. from nuImages or a checkerboard) when available.
+  hfov_deg: 65.0
+  ref_width: 1280      # image width the focal length refers to
+  # focal_px: 1005.0   # set this to override hfov_deg with a known focal length
+  # Bird's-eye view (src/bev.py) assumes a flat road and a level camera:
+  height_m: 1.3        # camera height above the road (typical dash-cam)
+  horizon_frac: 0.53   # horizon row as a fraction of image height (checked on BDD100K frames)
+
+# Real heights (metres). Sources: typical road-equipment standards.
+objects:
+  cone:
+    height_m: 0.70     # standard 28-inch traffic cone
+  barrier:
+    height_m: 1.00     # A-frame / Type I-II barricade; real barriers vary 0.8-1.5 m
+  stop_sign:
+    height_m: 0.75     # standard 30-inch octagonal stop sign face
+    use_max_side: true # sign is as wide as tall; use the larger box side so a cut-off box still works

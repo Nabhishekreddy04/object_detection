@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+      - name: Install dependencies (CPU-only PyTorch)
+        run: |
+          sudo apt-get update && sudo apt-get install -y libgl1
+          pip install --extra-index-url https://download.pytorch.org/whl/cpu \
+            -r requirements.txt -r requirements-serve.txt -r requirements-dev.txt
+      - name: Lint
+        run: |
+          ruff check src tests
+          ruff format --check src tests
+      - name: Unit + API tests
+        run: pytest
+
+  docker:
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t nav-detector .
+      - name: Smoke test the running container
+        run: |
+          docker run -d --name api -p 8000:8000 nav-detector
+          for i in $(seq 1 30); do curl -fs localhost:8000/health && break; sleep 2; done
+          curl -fs -F file=@assets/samples/bca36352-acc82f86.jpg localhost:8000/detect | tee response.json
+          python3 -c "import json; d = json.load(open('response.json'))['detections']; assert any(x['class'] == 'barrier' for x in d), d"
+      - name: Container logs
+        if: always()
+        run: docker logs api || true

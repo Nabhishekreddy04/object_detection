@@ -1,0 +1,13 @@
+.venv/
+/data/
+/runs/
+__pycache__/
+*.pt
+*.onnx
+.DS_Store
+/colab_upload/
+.pytest_cache/
+.ruff_cache/
+# final model weights are shipped (small); everything else in models/ is rebuilt by the scripts
+!models/yolo26n_nav_v3.pt
+!models/yolo26n_nav_v3_int8.onnx

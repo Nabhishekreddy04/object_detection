@@ -1,0 +1,19 @@
+[project]
+name = "nav-object-detection"
+version = "1.0.0"
+description = "Cone / barrier / stop-sign detection with monocular distance estimation for robot navigation"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
